@@ -82,7 +82,8 @@ def main():
 
     # Lê o arquivo Excel
     try:
-        df = pd.read_excel(DATA_FILE)
+        # Com o debug, descobrimos que precisamos pular 6 linhas para chegar no cabeçalho real
+        df = pd.read_excel(DATA_FILE, skiprows=6)
         print("Arquivo Excel lido com sucesso.")
     except Exception as e:
         print(f"ERRO ao ler o arquivo Excel: {e}")
@@ -93,13 +94,13 @@ def main():
     # (Isso pode precisar de ajuste dependendo do arquivo real)
     column_mapping = {
         'Concurso': 'concurso',
-        'Data Sorteio': 'data_sorteio',
-        '1ª Dezena': 'dezena1',
-        '2ª Dezena': 'dezena2',
-        '3ª Dezena': 'dezena3',
-        '4ª Dezena': 'dezena4',
-        '5ª Dezena': 'dezena5',
-        '6ª Dezena': 'dezena6'
+        'Data': 'data_sorteio',
+        'bola 1': 'dezena1',
+        'bola 2': 'dezena2',
+        'bola 3': 'dezena3',
+        'bola 4': 'dezena4',
+        'bola 5': 'dezena5',
+        'bola 6': 'dezena6'
     }
     df = df.rename(columns=column_mapping)
 
@@ -112,7 +113,7 @@ def main():
         return
 
     # Converte a coluna de data e extrai apenas a data
-    df['data_sorteio'] = pd.to_datetime(df['data_sorteio']).dt.date
+        df['data_sorteio'] = pd.to_datetime(df['data_sorteio'], dayfirst=True).dt.date
 
     # Conecta ao banco de dados
     try:
