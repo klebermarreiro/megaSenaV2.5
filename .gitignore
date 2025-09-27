@@ -1,0 +1,26 @@
+
+# Dependencies
+/node_modules
+/vendor
+/dist
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# VSCode
+.vscode/
+
+# User-specific files
+*.user
+*.suo
+
+# Environment variables
+.env
